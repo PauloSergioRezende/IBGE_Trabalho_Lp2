@@ -1,17 +1,16 @@
-# IBGE_Trabalho_Lp2
+﻿# IBGE_Trabalho_Lp2
 
 Primeiros passos:
 
-1 - Escolher qual arquivo baixar no github;
-2 - Criar novo galho do arquivo;
-3 - Baixar arquivo;
-4 - Abrir IDE Eclipse;
-5 - Importar arquivos para IDE;
-6 - Abrir pacote "br.Dados";
-7 - Clicar com botão direito do mouse no arquivo "Atividade_T2_dados_IBGE.txt";
-8 - Clicar em propriedades;
-9 - Copiar loclização do arquivo;
-10 - Abrir pacote padrão;
-11 - Abrir Classe DataLoader;
-12 - substituir os dados da String "path" pela localização copiada no passo 8;
+1 - Criar galho do projeto no GitHub;
+2 - Baixar arquivo IBGE;
+3 - Abrir IDE Eclipse;
+4 - Importar arquivos para IDE;
+5 - Abrir pacote "br.Dados";
+6 - Clicar com botão direito do mouse no arquivo "Atividade_T2_dados_IBGE.txt";
+7 - Clicar em propriedades;
+8 - Copiar loclização do arquivo;
+9 - Abrir pacote padrão;
+10 - Abrir Classe DataLoader;
+11 - substituir os dados da String "path" pela localização copiada no passo 8;
 
