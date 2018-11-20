@@ -13,5 +13,5 @@ Primeiros passos:
 9 - Copiar loclização do arquivo;
 10 - Abrir pacote padrão;
 11 - Abrir Classe DataLoader;
-12 - substituar os dados da String path pela localização copiada no passo 8;
+12 - substituir os dados da String "path" pela localização copiada no passo 8;
 
