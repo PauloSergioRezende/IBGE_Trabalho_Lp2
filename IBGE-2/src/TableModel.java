@@ -27,6 +27,10 @@ public class TableModel extends AbstractTableModel {
     public Object getRowData(int row){
     	return data[row];
     }
+    
+    public void setData(Object[][] data) {
+    	this.data = data;
+    }
     /*
      * JTable uses this method to determine the default renderer/
      * editor for each cell.  If we didn't implement this method,

@@ -1,30 +1,33 @@
 
-
+import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class DataLoader{
+public class DataLoader {
 	// atributos
 	private static String[] header;
 	private static Object[][] data;
-	private static String path = "C:\\Users\\paulo\\eclipse-workspace\\IBGE-2\\src\\br\\Dados\\Atividade_T2_dados_IBGE.txt";
+	private static String path = "C:\\Users\\paulo\\Documents\\GitHub\\IBGE_Trabalho_Lp2\\IBGE-2\\src\\br\\Dados\\Atividade_T2_dados_IBGE.txt";
 	private static String separator = "*";
 
-	static{
+	static {
 		convertData(SuporteArquivo.leArquivo(path));
-		convertHeader(SuporteArquivo.getHeader()); 		
+		convertHeader(SuporteArquivo.getHeader());
 	}
-	
+
 	// getters & setters
 	public static String[] getHeader() {
 		return header;
 	}
+
 	private static void setHeader(String[] header) {
 		DataLoader.header = header;
 	}
+
 	public static Object[][] getData() {
 		return data;
 	}
+
 	private static void setData(Object[][] data) {
 		DataLoader.data = data;
 	}
@@ -34,23 +37,24 @@ public class DataLoader{
 		setHeader(new String[5]);
 		StringTokenizer st = new StringTokenizer(header, separator);
 		int i = 0;
-		while (st.hasMoreTokens()){
+		while (st.hasMoreTokens()) {
 			DataLoader.header[i++] = st.nextToken();
 		}
 //		for (int k=0;k<this.columnNames.length;k++){
 //			System.out.print(DataLoader.header[k]+" ");
 //		}
 	}
-	private static void convertData(List<Municipio>municipios){
+
+	private static void convertData(List<Municipio> municipios) {
 		data = new String[municipios.size()][5];
 		int i = 0;
-		for (Municipio municipio: municipios) {
-			data[i]    = new String[5];
+		for (Municipio municipio : municipios) {
+			data[i] = new String[5];
 			data[i][0] = municipio.getSiglaUF();
 			data[i][1] = municipio.getCodUF();
 			data[i][2] = municipio.getCodMun();
 			data[i][3] = municipio.getMunicipio();
-			data[i][4] = municipio.getPopulacao(); 
+			data[i][4] = municipio.getPopulacao();
 			i++;
 		}
 //		System.out.println("============================= data.lenght: "+data.length);
@@ -60,5 +64,12 @@ public class DataLoader{
 //			}
 //			System.out.println("\n");
 //		}
+	}
+	
+	public static Object[][] ordenaDados() {
+		List<Municipio> aux = SuporteArquivo.leArquivo(path);
+		Collections.sort(aux, new MunicipioComparator());
+		convertData(aux);
+		return data;
 	}
 }
