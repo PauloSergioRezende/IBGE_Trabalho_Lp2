@@ -5,12 +5,14 @@ import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.List;
+//import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -335,9 +337,13 @@ public class IBGEGui implements WindowListener, ActionListener, ListSelectionLis
 		}
 		if(e.getSource() == tglbtnOrdena) {
 			if(tglbtnOrdena.isSelected()) {
-				
+				tableModel.setData(DataLoader.ordenaDados());
+				scrollPane.setViewportView(table);
+				habilitaSelecao();
 			}else {
-				
+				tableModel = new TableModel();
+				scrollPane.setViewportView(table);
+				habilitaSelecao();
 			}
 		}
 	}
