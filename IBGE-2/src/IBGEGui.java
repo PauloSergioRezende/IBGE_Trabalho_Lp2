@@ -56,6 +56,7 @@ public class IBGEGui implements WindowListener, ActionListener, ListSelectionLis
 	private JButton btnOcorrencias;
 	private JToggleButton tglbtnKtoX;
 	private JToggleButton tglbtnPopulation;
+	private JButton btnEntereE;
 
 	/**
 	 * Launch the application.
@@ -227,9 +228,13 @@ public class IBGEGui implements WindowListener, ActionListener, ListSelectionLis
 		queryPanel.add(tglbtnKtoX);
 		tglbtnKtoX.addActionListener(this);
 		
-		tglbtnPopulation = new JToggleButton("menos de 100.000");
+		tglbtnPopulation = new JToggleButton("Menos de 100.000");
 		queryPanel.add(tglbtnPopulation);
 		tglbtnPopulation.addActionListener(this);
+		
+		btnEntereE = new JButton("Entere 150.000 e 50.000");
+		queryPanel.add(btnEntereE);
+		btnEntereE.addActionListener(this);
 
 		tableModel = new TableModel();
 		table = new JTable(tableModel);
@@ -377,7 +382,10 @@ public class IBGEGui implements WindowListener, ActionListener, ListSelectionLis
 				resetTableModle();
 			}
 		}
-		
+		if(e.getSource() == btnEntereE) {
+			tableModel.contPopulacaoInferior();
+			atualizaTabela();
+		}
 	}
 
 	@Override

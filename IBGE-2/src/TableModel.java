@@ -113,7 +113,30 @@ public class TableModel extends AbstractTableModel {
 		}
 		data = aux;
 	}
-
+	public void contPopulacaoInferior() {
+		int cont = 0;
+		for (int i = 0; i < data.length; i++) {
+			switch ((String) data[i][0]) {
+			case "DF":
+			case "GO":
+			case "MT":
+			case "MS":
+				String aux = "";
+				StringTokenizer aux2 = new StringTokenizer((String)data[i][4], ".");
+				while(aux2.hasMoreTokens()) {
+					aux += aux2.nextToken();
+				}
+			
+				if(Double.valueOf(aux)<=150000 && Double.valueOf(aux)>=50000) {
+					cont++;
+				}
+			default:
+				break;
+			}
+		}
+		System.out.println("Quantidade de municípios da região centro-oestecom"
+				+ " população entre 50.000 e 150.000 habitantes: "+cont);
+	}
 	/*
 	 * JTable uses this method to determine the default renderer/ editor for each
 	 * cell. If we didn't implement this method, then the last column would contain
