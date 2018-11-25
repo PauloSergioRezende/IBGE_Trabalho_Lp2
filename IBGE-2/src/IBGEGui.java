@@ -53,6 +53,7 @@ public class IBGEGui implements WindowListener, ActionListener, ListSelectionLis
 	private JButton btnProximo;
 	private JButton btnUltimo;
 	private JToggleButton tglbtnOrdena;
+	private JButton btnOcorrencias;
 
 	/**
 	 * Launch the application.
@@ -215,6 +216,10 @@ public class IBGEGui implements WindowListener, ActionListener, ListSelectionLis
 		tglbtnOrdena.addActionListener(this);
 		queryPanel.add(tglbtnOrdena);
 		mainPanel.add(queryPanel);
+		
+		btnOcorrencias = new JButton("Ocorrencias");
+		queryPanel.add(btnOcorrencias);
+		btnOcorrencias.addActionListener(this);
 
 		tableModel = new TableModel();
 		table = new JTable(tableModel);
@@ -346,6 +351,10 @@ public class IBGEGui implements WindowListener, ActionListener, ListSelectionLis
 				habilitaSelecao();
 			}
 		}
+		if(e.getSource() == btnOcorrencias) {
+			tableModel.frequency();
+		}
+		
 	}
 
 	@Override
