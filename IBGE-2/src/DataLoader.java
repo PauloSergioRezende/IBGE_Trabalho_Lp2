@@ -25,6 +25,7 @@ public class DataLoader {
 	}
 
 	public static Object[][] getData() {
+//		convertData(SuporteArquivo.leArquivo(path));
 		return data;
 	}
 
@@ -70,6 +71,8 @@ public class DataLoader {
 		List<Municipio> aux = SuporteArquivo.leArquivo(path);
 		Collections.sort(aux, new MunicipioComparator());
 		convertData(aux);
-		return data;
+		Object[][] lool = data.clone();
+		convertData(SuporteArquivo.leArquivo(path));
+		return lool;
 	}
 }
