@@ -54,6 +54,9 @@ public class IBGEGui implements WindowListener, ActionListener, ListSelectionLis
 	private JButton btnUltimo;
 	private JToggleButton tglbtnOrdena;
 	private JButton btnOcorrencias;
+	private JToggleButton tglbtnKtoX;
+	private JToggleButton tglbtnPopulation;
+	private JButton btnEntereE;
 
 	/**
 	 * Launch the application.
@@ -220,6 +223,18 @@ public class IBGEGui implements WindowListener, ActionListener, ListSelectionLis
 		btnOcorrencias = new JButton("Ocorrencias");
 		queryPanel.add(btnOcorrencias);
 		btnOcorrencias.addActionListener(this);
+		
+		tglbtnKtoX = new JToggleButton("KtoX");
+		queryPanel.add(tglbtnKtoX);
+		tglbtnKtoX.addActionListener(this);
+		
+		tglbtnPopulation = new JToggleButton("Menos de 100.000");
+		queryPanel.add(tglbtnPopulation);
+		tglbtnPopulation.addActionListener(this);
+		
+		btnEntereE = new JButton("Entere 150.000 e 50.000");
+		queryPanel.add(btnEntereE);
+		btnEntereE.addActionListener(this);
 
 		tableModel = new TableModel();
 		table = new JTable(tableModel);
@@ -227,7 +242,7 @@ public class IBGEGui implements WindowListener, ActionListener, ListSelectionLis
 		table.getSelectionModel().addListSelectionListener(this);	//<<---
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 318, 434, 183);
+		scrollPane.setBounds(0, 318, 434, 175);
 		mainPanel.add(scrollPane);
 		scrollPane.setViewportView(table);
 		configTableColumns();
@@ -340,21 +355,37 @@ public class IBGEGui implements WindowListener, ActionListener, ListSelectionLis
 			table.requestFocus();
 			table.changeSelection(linhaSel, 0, false, false);
 		}
-		if(e.getSource() == tglbtnOrdena) {
-			if(tglbtnOrdena.isSelected()) {
-				tableModel.setData(DataLoader.ordenaDados());
-				scrollPane.setViewportView(table);
-				habilitaSelecao();
-			}else {
-				tableModel = new TableModel();
-				scrollPane.setViewportView(table);
-				habilitaSelecao();
-			}
-		}
 		if(e.getSource() == btnOcorrencias) {
 			tableModel.frequency();
 		}
-		
+		if(e.getSource() == tglbtnOrdena) {
+			if(tglbtnOrdena.isSelected()) {
+				tableModel.setData(DataLoader.ordenaDados());
+				atualizaTabela();
+			}else {
+				resetTableModle();
+			}
+		}
+		if(e.getSource() == tglbtnKtoX) {
+			if(tglbtnKtoX.isSelected()) {
+				tableModel.kTOx();
+				atualizaTabela();
+			}else {
+				resetTableModle();
+			}
+		}
+		if(e.getSource() == tglbtnPopulation) {
+			if(tglbtnPopulation.isSelected()) {
+				tableModel.populacaoInferior();
+				atualizaTabela();
+			}else {
+				resetTableModle();
+			}
+		}
+		if(e.getSource() == btnEntereE) {
+			tableModel.contPopulacaoInferior();
+			atualizaTabela();
+		}
 	}
 
 	@Override
@@ -397,5 +428,16 @@ public class IBGEGui implements WindowListener, ActionListener, ListSelectionLis
 			btnProximo.setEnabled(true);
 			btnUltimo.setEnabled(true);			
 		}
+	}
+	
+	public void resetTableModle() {
+		tableModel.setData(DataLoader.getData());;
+		scrollPane.setViewportView(table);
+		habilitaSelecao();
+	}
+	
+	public void	atualizaTabela() {
+		scrollPane.setViewportView(table);
+		habilitaSelecao();
 	}
 }
