@@ -38,105 +38,11 @@ public class TableModel extends AbstractTableModel {
 	public void setData(Object[][] data) {
 		this.data = data;
 	}
-
-	public void frequency() {
-		Map<String, Integer> mapa = new HashMap<String, Integer>();
-		String buffer = "";
-		for (int i = 1; i < data.length; i++) {
-			buffer += (String) data[i][3] + ",";
-		}
-		StringTokenizer tokenizer = new StringTokenizer(buffer, ",");
-		while (tokenizer.hasMoreTokens()) {
-			String word = tokenizer.nextToken().toLowerCase();
-			if (mapa.containsKey(word)) {
-				mapa.put(word, mapa.get(word) + 1);
-			} else
-				mapa.put(word, 1);
-		}
-		TreeSet<String> chavesOrdenadas = new TreeSet<String>(mapa.keySet());
-		System.out.println("Ocorrencias:");
-		for (String key : chavesOrdenadas)
-			System.out.printf("%-21s%10s\n", key, mapa.get(key));
+	
+	public Object[][] getData(){
+		return data;
 	}
-
-	public void kTOx() {
-		Stack<Object> pilha = new Stack<Object>();
-		for (int i = 0; i < data.length; i++) {
-			switch ((String) data[i][0]) {
-			case "PR":
-			case "SC":
-			case "RS":
-				if (((String) data[i][3]).toLowerCase().charAt(0) >= 'k'
-						&& ((String) data[i][3]).toLowerCase().charAt(0) <= 'x') {
-					pilha.push(data[i]);
-				}
-			default:
-				break;
-			}
-		}
-		Object[][] aux = new String[pilha.size()][5];
-		int cont = pilha.size() - 1;
-		while (!pilha.empty()) {
-			aux[cont] = (Object[]) pilha.pop();
-			cont--;
-		}
-		data = aux;
-
-	}
-
-	public void populacaoInferior() {
-		Stack<Object> pilha = new Stack<Object>();
-		for (int i = 0; i < data.length; i++) {
-			switch ((String) data[i][0]) {
-			case "DF":
-			case "GO":
-			case "MT":
-			case "MS":
-				String aux = "";
-				StringTokenizer aux2 = new StringTokenizer((String)data[i][4], ".");
-				while(aux2.hasMoreTokens()) {
-					aux += aux2.nextToken();
-				}
-			
-				if(Double.valueOf(aux)<=100000) {
-					pilha.push(data[i]);
-				}
-			default:
-				break;
-			}
-		}
-		Object[][] aux = new String[pilha.size()][5];
-		int cont = pilha.size() - 1;
-		while (!pilha.empty()) {
-			aux[cont] = (Object[]) pilha.pop();
-			cont--;
-		}
-		data = aux;
-	}
-	public void contPopulacaoInferior() {
-		int cont = 0;
-		for (int i = 0; i < data.length; i++) {
-			switch ((String) data[i][0]) {
-			case "DF":
-			case "GO":
-			case "MT":
-			case "MS":
-				String aux = "";
-				StringTokenizer aux2 = new StringTokenizer((String)data[i][4], ".");
-				while(aux2.hasMoreTokens()) {
-					aux += aux2.nextToken();
-				}
-			
-				if(Double.valueOf(aux)<=150000 && Double.valueOf(aux)>=50000) {
-					cont++;
-				}
-			default:
-				break;
-			}
-		}
-		System.out.println("Quantidade de municípios da região centro-oestecom"
-				+ " população entre 50.000 e 150.000 habitantes: "+cont);
-	}
+	
 	/*
 	 * JTable uses this method to determine the default renderer/ editor for each
 	 * cell. If we didn't implement this method, then the last column would contain
